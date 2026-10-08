@@ -1,0 +1,46 @@
+---
+/** Project timeline, Nov 2025 to Feb 2028, with today's marker calculated at build time. */
+import { PROJECT_START, PROJECT_END, projectProgress, formatMonth } from '../lib/project';
+
+interface Props {
+  today?: Date;
+}
+const today = Astro.props.today ?? new Date();
+const progress = projectProgress(today);
+const pct = (p: number) => `${(p * 100).toFixed(2)}%`;
+
+const total = PROJECT_END.getTime() - PROJECT_START.getTime();
+const at = (d: Date) => (d.getTime() - PROJECT_START.getTime()) / total;
+const months =
+  (PROJECT_END.getUTCFullYear() - PROJECT_START.getUTCFullYear()) * 12 +
+  (PROJECT_END.getUTCMonth() - PROJECT_START.getUTCMonth());
+
+// Year ticks sit on the line. Start and end dates get their own row so labels never collide.
+const years = [2026, 2027, 2028].map((y) => ({ label: String(y), pos: at(new Date(Date.UTC(y, 0, 1))) }));
+const inProgress = progress > 0 && progress < 1;
+---
+<figure class="timeline" aria-labelledby="timeline-caption">
+  <figcaption id="timeline-caption" class="visually-hidden">
+    Project timeline from {formatMonth(PROJECT_START)} to {formatMonth(PROJECT_END)}.
+    {inProgress && `Today, ${formatMonth(today)}, the project is ${Math.round(progress * 100)} percent through.`}
+  </figcaption>
+  <div class="timeline__track" style={`--months: ${months}`} aria-hidden="true">
+    <span class="timeline__months"></span>
+    <span class="timeline__progress" style={`width: ${pct(progress)}`}></span>
+    {inProgress && (
+      <span class="timeline__now" style={`left: ${pct(progress)}`}>
+        <span class="timeline__now-label">Today</span>
+        <span class="timeline__now-dot"></span>
+      </span>
+    )}
+  </div>
+  <ol class="timeline__years" aria-hidden="true">
+    {years.map((y) => (
+      <li class="timeline__year" style={`left: ${pct(y.pos)}`}>{y.label}</li>
+    ))}
+  </ol>
+  <p class="timeline__range label" aria-hidden="true">
+    <span>Start {formatMonth(PROJECT_START)}</span>
+    <span>End {formatMonth(PROJECT_END)}</span>
+  </p>
+</figure>

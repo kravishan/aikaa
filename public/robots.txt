@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kravishan.github.io/aikaa-dev/sitemap-index.xml

@@ -1,0 +1,33 @@
+---
+/** Proportional bar: each part's width matches its minutes. */
+interface Part {
+  title: string;
+  minutes: number;
+}
+interface Props {
+  parts: Part[];
+  label?: string;
+}
+const { parts, label = 'Workshop parts and their length' } = Astro.props;
+const total = parts.reduce((sum, p) => sum + p.minutes, 0);
+const hm = (m: number) => {
+  const h = Math.floor(m / 60);
+  const r = m % 60;
+  return h ? `${h} h${r ? ` ${r} min` : ''}` : `${r} min`;
+};
+---
+<figure class="workshop-bar">
+  <ol class="workshop-bar__parts" aria-label={label}>
+    {parts.map((p, i) => (
+      <li class="workshop-bar__part" style={`--minutes: ${p.minutes}`}>
+        <span class="workshop-bar__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+        <span class="workshop-bar__title">{p.title}</span>
+        <span class="workshop-bar__minutes">{p.minutes} min</span>
+      </li>
+    ))}
+  </ol>
+  <figcaption class="workshop-bar__scale">
+    <span>0 min</span>
+    <span>Total {hm(total)}</span>
+  </figcaption>
+</figure>

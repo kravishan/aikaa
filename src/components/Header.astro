@@ -1,0 +1,44 @@
+---
+import { url } from '../lib/url';
+import { NAV, EU_LOGO } from '../lib/nav';
+
+const current = Astro.url.pathname;
+const isCurrent = (path: string) => current.startsWith(url(path));
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href={url('/')} aria-label="AIKAA home">
+      <span class="wordmark__name">AIKAA</span>
+      <span class="wordmark__sub">Humane automation for small companies</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      <!-- Wide screens: plain list. Small screens: a native fold-out menu (no JavaScript needed). -->
+      <ul class="site-nav__list site-nav__list--wide">
+        {NAV.map((item) => (
+          <li>
+            <a href={url(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+      <details class="site-nav__toggle">
+        <summary>Menu</summary>
+        <ul class="site-nav__list">
+          {NAV.map((item) => (
+            <li>
+              <a href={url(item.path)} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    </nav>
+
+    <img
+      class="site-header__eu"
+      src={url(EU_LOGO.src)}
+      alt={EU_LOGO.alt}
+      width={EU_LOGO.w}
+      height={EU_LOGO.h}
+    />
+  </div>
+</header>

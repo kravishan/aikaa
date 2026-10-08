@@ -1,0 +1,8 @@
+---
+/** Visible marker for a fact that still needs confirming. */
+interface Props {
+  note?: string;
+}
+const { note } = Astro.props;
+---
+<span class="confirm" title={note ? `Needs confirming: ${note}` : 'Needs confirming'}>[CONFIRM{note ? `: ${note}` : ''}]</span>

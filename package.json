@@ -1,0 +1,22 @@
+{
+  "name": "aikaa",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Public website for the AIKAA project (ESF+ co-funded).",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.0",
+    "@fontsource/ibm-plex-mono": "^5.2.0",
+    "@fontsource/ibm-plex-sans": "^5.2.0",
+    "astro": "^5.13.0"
+  }
+}

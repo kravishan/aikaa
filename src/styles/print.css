@@ -1,0 +1,33 @@
+/* Print: black and white friendly, no navigation. */
+@media print {
+  :root {
+    --paper: #fff;
+    --surface: #fff;
+    --ink: #000;
+    --ink-muted: #333;
+    --rule: #999;
+    --rule-strong: #666;
+    --primary: #000;
+    --primary-tint: #eee;
+    --accent: #000;
+    --accent-text: #000;
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body { font-size: 10.5pt; }
+
+  .no-print,
+  .skip-link,
+  .site-header nav,
+  .chip { display: none !important; }
+
+  a { color: inherit; text-decoration: none; }
+
+  .card, .table-wrap, .callout { break-inside: avoid; }
+
+  .timeline__progress, .journey__stage--highlight::after { background: #000; }
+}

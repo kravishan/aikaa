@@ -1,0 +1,42 @@
+---
+import { url } from '../lib/url';
+import { PARTNERS, EU_LOGO } from '../lib/nav';
+
+const updated = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<footer class="site-footer">
+  <div class="logo-strip">
+    <div class="container logo-strip__inner">
+      <img class="logo-strip__eu" src={url(EU_LOGO.src)} alt={EU_LOGO.alt} width={EU_LOGO.w} height={EU_LOGO.h} />
+      <ul class="logo-strip__partners" aria-label="Partners">
+        {PARTNERS.map((p) => (
+          <li>
+            <a href={p.url}><img src={url(p.logo)} alt={p.name} width={p.w} height={p.h} style={`height: ${p.show}px`} /></a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <div class="site-footer__top">
+      <div>
+        <p class="site-footer__name">AIKAA!</p>
+        <p class="site-footer__muted">Intelligent and Humane Automation for Micro and SMEs. Runs from 1 November 2025 to 29 February 2028.</p>
+      </div>
+      <div class="site-footer__eu">
+        <p class="site-footer__muted site-footer__small">
+          Co-funded by the European Union. Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union. Neither the European Union nor the granting authority can be held responsible for them.
+        </p>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <ul class="site-footer__links">
+        <li><a href={url('accessibility/')}>Accessibility statement</a></li>
+        <li><a href={url('privacy/')}>Privacy</a></li>
+        <li><a href={url('contact/')}>Contact</a></li>
+      </ul>
+      <p class="site-footer__small site-footer__muted">Last updated {updated}</p>
+    </div>
+  </div>
+</footer>

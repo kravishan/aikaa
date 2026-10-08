@@ -1,0 +1,9 @@
+---
+/** Section divider: a thin time rule with small ticks. */
+interface Props {
+  marker?: number; // optional accent dot position, 0 to 1
+}
+const { marker } = Astro.props;
+const style = marker !== undefined ? `--marker: ${(marker * 100).toFixed(2)}%` : undefined;
+---
+<hr class:list={['time-rule', { 'time-rule--accent': marker !== undefined }]} style={style} aria-hidden="true" />

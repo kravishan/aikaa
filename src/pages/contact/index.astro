@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PARTNERS } from '../../lib/nav';
+
+// Source: the official project page at Haaga-Helia (checked 8 October 2026).
+const SOURCE = 'https://www.haaga-helia.fi/fi/hankkeet/aikaa';
+const PRIVACY_PDF = 'https://mediapankki.haaga-helia.fi/sharing/file/f3fb1fce80f68bac/Aikaa-hanke-tietosuojaseloste.pdf';
+---
+<Base title="Contact" description="How to reach the AIKAA! project team. The project is coordinated at Haaga-Helia University of Applied Sciences.">
+  <div class="page-head">
+    <div class="container">
+      <p class="label">Contact</p>
+      <h1>Get in touch</h1>
+      <p class="lede">Haaga-Helia coordinates the project. If you have a question about AIKAA!, write to or call the person below.</p>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="contact-grid">
+      <section class="contact-card" aria-labelledby="coordinator">
+        <p class="contact-card__role">Project contact</p>
+        <h2 id="coordinator">Mariitta Rauhala</h2>
+        <p class="contact-card__org">Principal Lecturer, Haaga-Helia University of Applied Sciences</p>
+        <dl class="contact-card__lines">
+          <dt>Email</dt>
+          <dd><a href="mailto:mariitta.rauhala@haaga-helia.fi">mariitta.rauhala@haaga-helia.fi</a></dd>
+          <dt>Phone</dt>
+          <dd><a href="tel:+358294471189">+358 29 447 1189</a></dd>
+        </dl>
+      </section>
+
+      <section class="contact-facts" aria-labelledby="facts">
+        <h2 id="facts" class="contact-h2">The project in brief</h2>
+        <dl class="contact-facts__list">
+          <dt>Full name</dt>
+          <dd>AIKAA! Intelligent and Humane Automation for Micro and SMEs</dd>
+          <dt>Runs</dt>
+          <dd>November 2025 to February 2028</dd>
+          <dt>Lead partner</dt>
+          <dd>Haaga-Helia University of Applied Sciences</dd>
+          <dt>Other partners</dt>
+          <dd>University of Oulu, LAB University of Applied Sciences, Seinäjoki University of Applied Sciences</dd>
+          <dt>Funding</dt>
+          <dd>European Social Fund Plus (ESF+)</dd>
+          <dt>Who takes part</dt>
+          <dd>Managers and staff of 32 micro, small and medium-sized companies across Finland</dd>
+          <dt>Sectors</dt>
+          <dd>Food, property management, financial administration and technology</dd>
+        </dl>
+      </section>
+    </div>
+
+    <section class="contact-more" aria-labelledby="more">
+      <h2 id="more" class="contact-h2">More from the partners</h2>
+      <ul class="contact-links">
+        <li><a href={SOURCE}>AIKAA! on the Haaga-Helia website</a> <span>in Finnish</span></li>
+        <li><a href={PRIVACY_PDF}>Privacy notice for the project</a> <span>PDF, in Finnish</span></li>
+        {PARTNERS.map((p) => <li><a href={p.url}>{p.name}</a></li>)}
+      </ul>
+      <p class="contact-note">There is no contact form on this site. We would rather not collect your details on a web page. Email works.</p>
+    </section>
+  </div>
+</Base>

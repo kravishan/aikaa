@@ -1,0 +1,60 @@
+---
+/** Card for one AI tool in the AI Model Guide. */
+import Confirm from './Confirm.astro';
+
+interface Props {
+  name: string;
+  href?: string;
+  provider: string;
+  country: string;
+  strongAt: string[];
+  lessSuitedFor: string[];
+  euDataOption: string;
+  trainsOnConsumerData: string;
+  businessPlan: string;
+  freePlan: string;
+  paidFrom: string;
+  finnish: 'Good' | 'Very good' | 'Not tested';
+  lastReviewed: string;
+  tags?: string[];
+}
+const p = Astro.props;
+const isConfirm = (v: string) => v.includes('[CONFIRM]');
+const finnishFit = p.finnish === 'Not tested' ? 'fit--neutral' : 'fit--strong';
+const id = `mc-${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+<article class="card model-card" aria-labelledby={id} data-tags={p.tags?.join(' ')}>
+  <header>
+    <h3 class="model-card__name" id={id}>
+      {p.href ? <a href={p.href}>{p.name}</a> : p.name}
+    </h3>
+    <p class="model-card__provider label">{p.provider} · {p.country}</p>
+  </header>
+
+  <div>
+    <h4>Strong at</h4>
+    <ul>{p.strongAt.map((s) => <li>{s}</li>)}</ul>
+  </div>
+
+  <div>
+    <h4>Less suited for</h4>
+    <ul>{p.lessSuitedFor.map((s) => <li>{s}</li>)}</ul>
+  </div>
+
+  <dl class="facts">
+    <dt>EU data</dt>
+    <dd>{isConfirm(p.euDataOption) ? <Confirm /> : p.euDataOption}</dd>
+    <dt>Trains on chats</dt>
+    <dd>{isConfirm(p.trainsOnConsumerData) ? <Confirm /> : p.trainsOnConsumerData}</dd>
+    <dt>Business plan</dt>
+    <dd>{isConfirm(p.businessPlan) ? <Confirm /> : p.businessPlan}</dd>
+    <dt>Free plan</dt>
+    <dd>{isConfirm(p.freePlan) ? <Confirm /> : p.freePlan}</dd>
+    <dt>Paid from</dt>
+    <dd>{isConfirm(p.paidFrom) ? <Confirm /> : p.paidFrom}</dd>
+    <dt>Finnish</dt>
+    <dd><span class:list={['fit', finnishFit]}>{p.finnish}</span></dd>
+  </dl>
+
+  <p class="model-card__reviewed label">Last reviewed: {p.lastReviewed}</p>
+</article>

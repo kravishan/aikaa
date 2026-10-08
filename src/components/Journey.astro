@@ -1,0 +1,21 @@
+---
+/** A sequence of stages drawn on the time rule. Horizontal on wide screens, vertical on mobile. */
+interface Stage {
+  title: string;
+  text?: string;
+}
+interface Props {
+  stages: Stage[];
+  highlight?: number; // index of a stage to mark with the accent colour
+  label?: string;
+}
+const { stages, highlight, label = 'Stages' } = Astro.props;
+---
+<ol class="journey" style={`--stages: ${stages.length}`} aria-label={label}>
+  {stages.map((s, i) => (
+    <li class:list={['journey__stage', { 'journey__stage--highlight': i === highlight }]}>
+      <span class="journey__title">{s.title}</span>
+      {s.text && <span class="journey__text">{s.text}</span>}
+    </li>
+  ))}
+</ol>

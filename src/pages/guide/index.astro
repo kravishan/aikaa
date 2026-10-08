@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+import { CHECKED_ON, TOOLS, USES } from '../../data/guide';
+
+const byId = Object.fromEntries(TOOLS.map((t) => [t.id, t]));
+const name = (id: string) => byId[id]?.name ?? id;
+---
+<Base
+  title="AI Model Guide"
+  description="Which AI tool to try for which job at work. A simple, printable list for small companies, checked on a fixed date."
+>
+  <div class="page-head">
+    <div class="container">
+      <p class="label">AI Model Guide · Basic version</p>
+      <h1>Which AI tool for which job?</h1>
+      <p class="lede">A short list for people who just want to get started. Find your job in the left column and try the tool next to it.</p>
+      <p class="guide-date">
+        <span class="guide-date__label">Checked on</span>
+        <time datetime="2026-10-08">{CHECKED_ON}</time>
+      </p>
+      <p class="guide-date__note">These tools change every few months. When we check the list again, this date changes too.</p>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="callout callout--caution guide-rule" role="note">
+      <span class="callout__title">One rule before anything else</span>
+      <p>Never paste personal data, client data or business secrets into a free AI tool. And read what it gives you before you use it. <a href={url('safe-use/')}>More on safe use</a></p>
+    </div>
+
+    <section aria-labelledby="uses-title">
+      <h2 id="uses-title" class="guide-h2">If you want to…</h2>
+      <div class="table-wrap">
+        <table class="guide-table">
+          <caption class="visually-hidden">Which AI tool to try first for each job, other tools that also work, and what to watch out for. Checked on {CHECKED_ON}.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Job</th>
+              <th scope="col">Try first</th>
+              <th scope="col">Also works</th>
+              <th scope="col">Watch out</th>
+            </tr>
+          </thead>
+          <tbody>
+            {USES.map((u) => (
+              <tr>
+                <th scope="row" data-label="Job">{u.task}</th>
+                <td data-label="Try first"><strong class="guide-first">{name(u.first)}</strong></td>
+                <td data-label="Also works">{u.also.length ? u.also.map(name).join(', ') : 'No other pick yet'}</td>
+                <td data-label="Watch out">{u.watch}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="tools-title" class="guide-tools">
+      <h2 id="tools-title" class="guide-h2">The tools on this page</h2>
+      <p class="guide-muted">All of them have a free version. The free versions are fine for trying things out. For company data, use a business plan and check its data settings.</p>
+      <ul class="tool-list">
+        {TOOLS.map((t) => (
+          <li>
+            <a href={t.url}>{t.name}</a>
+            <span class="tool-list__meta">{t.maker}, {t.country}</span>
+            <span class="tool-list__free">Free version: {t.free}</span>
+            {t.note && <span class="tool-list__meta">{t.note}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <p class="guide-actions no-print">
+      <button class="button button--secondary" type="button" onclick="window.print()">Print this page</button>
+    </p>
+
+    <p class="guide-disclaimer">
+      This guide is the AIKAA project team's view on the date shown. It is not an endorsement of any company. AI tools change often, so check the provider's own terms before you use one at work.
+    </p>
+  </div>
+</Base>

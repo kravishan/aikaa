@@ -1,0 +1,23 @@
+---
+/** Temporary page for sections that are still being written. */
+import Base from './Base.astro';
+import { url } from '../lib/url';
+
+interface Props {
+  title: string;
+  intro: string;
+}
+const { title, intro } = Astro.props;
+---
+<Base title={title} description={intro} noindex>
+  <div class="page-head">
+    <div class="container">
+      <p class="label">Coming soon</p>
+      <h1>{title}</h1>
+      <p class="lede">{intro}</p>
+    </div>
+  </div>
+  <div class="container section">
+    <p>We are still writing this page. <a href={url('/')}>Back to the home page</a></p>
+  </div>
+</Base>
