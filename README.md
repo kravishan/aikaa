@@ -2,7 +2,7 @@
 
 Public website for the AIKAA project: *Intelligent and Humane Automation for Micro and SMEs*.
 Built with [Astro](https://astro.build) as a static site and published on GitHub Pages at
-https://kravishan.github.io/aikaa-dev/
+https://kravishan.github.io/aikaa/
 
 ## Status
 
