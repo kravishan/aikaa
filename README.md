@@ -13,7 +13,7 @@ The hidden style guide is at `/aikaa-dev/styleguide/`.
 
 1. Install Node.js (LTS version) from https://nodejs.org
 2. In this folder run `npm install` once.
-3. Run `npm run dev` and open the address it prints (usually http://localhost:4321/aikaa-dev/).
+3. Run `npm run dev` and open the address it prints (usually http://localhost:4321/aikaa/).
 
 ## How publishing works
 
