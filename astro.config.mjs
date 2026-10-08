@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 // For a custom domain later: set `site` to the domain and `base` to '/'.
 export default defineConfig({
   site: 'https://kravishan.github.io',
-  base: '/aikaa-dev/',
+  base: '/aikaa/',
   trailingSlash: 'always',
   output: 'static',
   integrations: [
